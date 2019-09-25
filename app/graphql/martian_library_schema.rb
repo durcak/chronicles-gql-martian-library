@@ -1,6 +1,7 @@
 # app/graphql/martian_library_schema.rb
 
 class MartianLibrarySchema < GraphQL::Schema
+  use GraphQL::Execution::Interpreter
   use GraphQL::Subscriptions::ActionCableSubscriptions
 
   mutation(Types::MutationType)
