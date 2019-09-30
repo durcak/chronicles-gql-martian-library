@@ -7,6 +7,7 @@ const ProcessItemForm = ({
   initialTitle = '',
   initialDescription = '',
   initialImageUrl = '',
+  initialRole = '',
   onProcessItem,
   buttonText,
   loading,
@@ -14,6 +15,7 @@ const ProcessItemForm = ({
 }) => {
   const [title, setTitle] = useState(initialTitle);
   const [description, setDescription] = useState(initialDescription);
+  const [role, setRole] = useState(initialRole);
   const [imageUrl, setImageUrl] = useState(initialImageUrl);
   return (
     <div className={cs.form}>
@@ -36,7 +38,13 @@ const ProcessItemForm = ({
         className={cs.input}
         onChange={e => setDescription(e.currentTarget.value)}
       />
-
+      <input
+        type="text"
+        placeholder="role"
+        value={role}
+        className={cs.input}
+        onChange={e => setRole(e.currentTarget.value)}
+      />
       <input
         type="text"
         placeholder="url"
@@ -48,7 +56,7 @@ const ProcessItemForm = ({
         '...Loading'
       ) : (
         <button
-          onClick={() => onProcessItem({ title, description, imageUrl })}
+          onClick={() => onProcessItem({ title, description, imageUrl, role })}
           className={cs.button}
         >
           {buttonText}

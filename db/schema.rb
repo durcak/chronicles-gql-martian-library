@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2019_06_05_201951) do
     t.string "title"
     t.text "description"
     t.string "image_url"
+    t.string "role"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -29,6 +30,7 @@ ActiveRecord::Schema.define(version: 2019_06_05_201951) do
     t.string "first_name"
     t.string "last_name"
     t.string "email"
+    t.string "role", default: "NEW"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -11,6 +11,7 @@ const UpdateItemForm = ({
   initialTitle,
   initialDescription,
   initialImageUrl,
+  initialRole,
   onClose,
   onErrors,
   errors,
@@ -23,16 +24,18 @@ const UpdateItemForm = ({
             initialImageUrl={initialImageUrl}
             initialTitle={initialTitle}
             initialDescription={initialDescription}
+            initialRole={initialRole}
             errors={errors}
             buttonText="Update Item"
             loading={loading}
-            onProcessItem={({ title, description, imageUrl }) => {
+            onProcessItem={({ title, description, imageUrl, role }) => {
               updateItem({
                 variables: {
                   id,
                   title,
                   description,
                   imageUrl,
+                  role,
                 },
                 optimisticResponse: {
                   __typename: 'Mutation',
@@ -44,6 +47,7 @@ const UpdateItemForm = ({
                       title,
                       description,
                       imageUrl,
+                      role,
                     },
                     errors: null,
                   },

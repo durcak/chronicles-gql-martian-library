@@ -11,12 +11,13 @@ const AddItemForm = () => (
         buttonText="Add Item"
         loading={loading}
         errors={data && data.addItem.errors}
-        onProcessItem={({ title, description, imageUrl }) =>
+        onProcessItem={({ title, description, imageUrl, role }) =>
           addItem({
             variables: {
               title,
               description,
               imageUrl,
+              role,
             },
             update: (cache, { data: { addItem } }) => {
               {

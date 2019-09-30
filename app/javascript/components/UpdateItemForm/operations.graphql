@@ -5,6 +5,7 @@ mutation UpdateItemMutation(
   $title: String!
   $description: String
   $imageUrl: String
+  $role: String
 ) {
   updateItem(
     id: $id
@@ -12,6 +13,7 @@ mutation UpdateItemMutation(
       title: $title
       description: $description
       imageUrl: $imageUrl
+      role: $role
     }
   ) {
     item {

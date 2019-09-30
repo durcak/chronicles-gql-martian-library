@@ -15,14 +15,15 @@ const Library = () => {
         <div className={cs.library}>
           {loading || !data.items
             ? 'loading...'
-            : data.items.map(({ title, id, user, imageUrl, description }) => (
+            : data.items.map(({ title, id, user, imageUrl, description, role }) => (
                 <button
                   key={id}
                   className={cs.plate}
-                  onClick={() => setItem({ title, imageUrl, id, description })}
+                  onClick={() => setItem({ title, imageUrl, id, description, role })}
                 >
                   <div className={cs.title}>{title}</div>
                   <div>{description}</div>
+                  <div>{role}</div>
                   {imageUrl && <img src={imageUrl} className={cs.image} />}
                   {user ? (
                     <div className={cs.user}>added by {user.email}</div>
@@ -37,6 +38,7 @@ const Library = () => {
               initialTitle={item.title}
               initialDescription={item.description}
               initialImageUrl={item.imageUrl}
+              initialRole={item.role}
               onClose={() => setItem(null)}
               onErrors={itemUpdateErrors => {
                 if (itemUpdateErrors) {

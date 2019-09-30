@@ -3,4 +3,5 @@ fragment ItemFragment on Item {
   title
   imageUrl
   description
+  role
 }

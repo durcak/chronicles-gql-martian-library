@@ -5,6 +5,7 @@ mutation AddItemMutation(
   $title: String!
   $description: String
   $imageUrl: String
+  $role: String
 ) {
   addItem(
     attributes: {
@@ -12,6 +13,7 @@ mutation AddItemMutation(
       title: $title
       description: $description
       imageUrl: $imageUrl
+      role: $role
     }
   ) {
     item {

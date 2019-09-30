@@ -7,5 +7,6 @@ module Types
     argument :title, String, required: true
     argument :description, String, required: false
     argument :image_url, String, required: false
+    argument :role, String, required: false
   end
 end
