@@ -15,9 +15,9 @@ module Mutations
 
       if item.save
         if attributes[:role].present?
-          MartianLibrarySchema.subscriptions.trigger("itemAdded", {}, item, scope: attributes[:role])
+          MartianLibrarySchema.subscriptions.trigger("itemAdded", {id: 10}, { item: item }, scope: attributes[:role])
         else
-          Role.constants.each{ |role| MartianLibrarySchema.subscriptions.trigger("itemAdded", {}, item, scope: role.to_s) }
+          Role.constants.each{ |role| MartianLibrarySchema.subscriptions.trigger("itemAdded", {id: 10}, { item: item }, scope: role.to_s) }
         end
 
         { item: item }

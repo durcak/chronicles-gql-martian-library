@@ -1,15 +1,14 @@
-class Subscriptions::ItemUpdated < Subscriptions::BaseSubscription
+class Subscriptions::ItemAdded < Subscriptions::BaseSubscription
   payload_type Types::ItemType
 
   argument :id, Integer, required: false
 
   def subscribe(id: nil)
-    puts 'SUBSCRIBEEEEE to UPDATE@@@'
+    puts 'SUBSCRIBEEEEE to ADD@@@'
     # Item.first # test return value on subscribe, works
   end
 
   def update(id: nil)
-    # object.update!(title: 'blank')
-    object
+    object[:item] # test update, works
   end
 end

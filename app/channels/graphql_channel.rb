@@ -7,13 +7,20 @@ class GraphqlChannel < ApplicationCable::Channel
 
   def execute(data)
     result = execute_query(data)
-
+    # puts '@@@@@@@@@@@@@@@@@@@@@@@@'
+    # puts ensure_hash(data['variables'])
+    # puts result.context[:subscription_id]
+    # puts '@@@@@@@@@@@@@@@@@@@@@@@@'
     payload = {
-      result: result.subscription? ? { data: nil } : result.to_h,
+      # result: result.subscription? ? { data: nil } : result.to_h,
+      result: result.to_h,
       more: result.subscription?
     }
-
+    # binding.pry if result.subscription?
     @subscription_ids << context[:subscription_id] if result.context[:subscription_id]
+
+    # puts "Subscription IDSSssssss:"
+    # puts @subscription_ids
 
     transmit(payload)
   end
@@ -30,7 +37,7 @@ class GraphqlChannel < ApplicationCable::Channel
     MartianLibrarySchema.execute(
       query: data["query"],
       context: context,
-      variables: data["variables"],
+      variables: ensure_hash(data['variables']),
       operation_name: data["operationName"]
     )
   end
@@ -42,5 +49,22 @@ class GraphqlChannel < ApplicationCable::Channel
       current_user_role: current_user.role,
       channel: self
     }
+  end
+
+  def ensure_hash(ambiguous_param)
+    case ambiguous_param
+    when String
+      if ambiguous_param.present?
+        ensure_hash(JSON.parse(ambiguous_param))
+      else
+        {}
+      end
+    when Hash, ActionController::Parameters
+      ambiguous_param
+    when nil
+      {}
+    else
+      raise ArgumentError, "Unexpected parameter: #{ambiguous_param}"
+    end
   end
 end

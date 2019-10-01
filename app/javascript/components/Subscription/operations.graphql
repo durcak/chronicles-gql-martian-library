@@ -1,8 +1,12 @@
 #/app/javascript/components/Subscription/operations.graphql
 #import '../../fragments/Item.graphql'
 
-subscription ItemSubscription {
-  itemAdded {
+subscription ItemSubscription(
+  $id: Int
+) {
+  itemAdded(
+    id: $id
+  ) {
     ...ItemFragment
     user {
       id
@@ -10,7 +14,9 @@ subscription ItemSubscription {
     }
   }
 
-  itemUpdated {
+  itemUpdated(
+    id: $id
+  ) {
     ...ItemFragment
     user {
       id

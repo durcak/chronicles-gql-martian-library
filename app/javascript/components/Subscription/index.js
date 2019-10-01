@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { ItemSubscription } from './operations.graphql';
 
+
 const Subscription = ({ subscribeToMore }) => {
   useEffect(() => {
     return subscribeToMore({
       document: ItemSubscription,
+      variables: {id: 10},
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data) return prev;
         const { itemAdded, itemUpdated } = subscriptionData.data;

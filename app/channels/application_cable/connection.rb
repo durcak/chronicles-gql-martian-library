@@ -12,8 +12,11 @@ module ApplicationCable
 
     def current_user
       token = request.params[:token].to_s
-      email = Base64.decode64(token)
-      User.find_by(email: email)
+
+      email = (token.present? && token != 'null') ? Base64.decode64(token) : nil
+      verified_user = User.find_by(email: email)
+
+      verified_user || reject_unauthorized_connection
     end
   end
 end
