@@ -15,12 +15,11 @@ module Mutations
 
       if item.update(attributes.to_h)
         if item.role.present?
-          MartianLibrarySchema.subscriptions.trigger("itemAdded", {}, item, scope: item.role)
+          MartianLibrarySchema.subscriptions.trigger("itemUpdated", {}, item, scope: item.role)
         else
-          Role.constants.each{ |role| MartianLibrarySchema.subscriptions.trigger("itemAdded", {}, item, scope: role.to_s) }
+          Role.constants.each{ |role| MartianLibrarySchema.subscriptions.trigger("itemUpdated", {}, item, scope: role.to_s) }
         end
 
-        MartianLibrarySchema.subscriptions.trigger("itemUpdated", {}, {nice: true})
         { item: item }
       else
         { errors: item.errors.full_messages }

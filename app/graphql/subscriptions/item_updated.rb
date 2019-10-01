@@ -1,9 +1,15 @@
 class Subscriptions::ItemUpdated < Subscriptions::BaseSubscription
+  payload_type Types::ItemType
 
-  def subscribe()
+  argument :id, String,
+           required: false
+
+  def subscribe(id: nil)
+    # binding.pry
   end
 
-  def update()
+  def update(id: nil)
+    # binding.pry
     # object.update!(title: 'blank')
     object
   end
