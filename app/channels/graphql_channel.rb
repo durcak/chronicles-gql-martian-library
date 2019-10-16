@@ -7,20 +7,13 @@ class GraphqlChannel < ApplicationCable::Channel
 
   def execute(data)
     result = execute_query(data)
-    # puts '@@@@@@@@@@@@@@@@@@@@@@@@'
-    # puts ensure_hash(data['variables'])
-    # puts result.context[:subscription_id]
-    # puts '@@@@@@@@@@@@@@@@@@@@@@@@'
+
     payload = {
-      # result: result.subscription? ? { data: nil } : result.to_h,
       result: result.to_h,
       more: result.subscription?
     }
-    # binding.pry if result.subscription?
-    @subscription_ids << context[:subscription_id] if result.context[:subscription_id]
 
-    # puts "Subscription IDSSssssss:"
-    # puts @subscription_ids
+    @subscription_ids << context[:subscription_id] if result.context[:subscription_id]
 
     transmit(payload)
   end

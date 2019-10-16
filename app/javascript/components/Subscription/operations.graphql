@@ -5,7 +5,7 @@ subscription ItemSubscription(
   $id: Int
 ) {
   itemAdded(
-    id: $id
+    test_id: $id
   ) {
     ...ItemFragment
     user {
